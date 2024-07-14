@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PhotoCard from "./components/PhotoCard";
-import { PIXABAY_API_KEY } from "./keys";
 import ImageSearch from "./components/ImageSearch";
 import { MagnifyingGlass } from 'react-loader-spinner'
 
@@ -9,11 +8,16 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [term, setTerm] = useState('')
   const [errMessage, setErrMessage] = useState('')
+  console.log(process.env.REACT_APP_API_KEY)
 
   useEffect(() => {
-    fetch(`https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${term}&image_type=photo&pretty=true`)
-      .then(res => res.json())
+    fetch(`https://pixabay.com/api/?key=40455341-fde64370ff2a7806f0e4dd73a&q=${term}&image_type=photo&pretty=true`)
+      .then(res => {
+        console.log(res)
+        res.json()
+      })
       .then(data => {
+        console.log("data", data)
         setImages(data.hits)
         setTimeout(() => {
           setIsLoading(false)
